@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Building {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column
 	private int id;
 

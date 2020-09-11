@@ -6,25 +6,33 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table
 public class Ticket {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@Column
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private int id;
 
-	@Column
 	private String vehicleNumber;
 
-	@Column
 	@CreationTimestamp
 	private Timestamp generatedTime;
+
+	@ManyToOne
+	@JoinColumn
+	private Space space;
 
 	public Ticket() { }
 
 	public Ticket( String vehicleNumber ) {
 		this.vehicleNumber = vehicleNumber;
+	}
+
+	public Space getSpace() {
+		return space;
+	}
+
+	public void setSpace( Space space ) {
+		this.space = space;
 	}
 
 	public int getId() {

@@ -1,24 +1,42 @@
 package dev.yashgupta.parkit.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table
-public class Building {
+public class Building extends BaseEntity< Building > {
+
+	// Fields
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@Column
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private int id;
 
-	@Column
 	private String name;
 
+	@OneToMany( cascade = CascadeType.ALL, mappedBy = "building", fetch = FetchType.EAGER )
+	private List< Floor > floors;
+
+	// Constructors
+
 	public Building( String name ) {
+		super( Building.class );
 		this.name = name;
 	}
 
-	public Building() { }
+	public Building() {
+		super( Building.class );
+	}
+
+	// Getters and Setters
+
+	public List< Floor > getFloors() {
+		return floors;
+	}
+
+	public void setFloors( List< Floor > floors ) {
+		this.floors = floors;
+	}
 
 	public int getId() {
 		return id;
